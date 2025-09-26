@@ -40,10 +40,13 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   `,
   styles: [`
     .mfe-container {
-      height: 100%;
+      height: calc(100vh - 56px - 1rem); /* Full height minus navbar and padding */
       display: flex;
       flex-direction: column;
       background: #f8f9fa;
+      overflow: hidden;
+      border-radius: 0.375rem;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     }
     
     .mfe-header {
