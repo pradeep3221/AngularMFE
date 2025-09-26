@@ -1,0 +1,43 @@
+services:
+  shell:
+    build:
+      context: .
+      dockerfile: Dockerfile.shell
+    ports:
+      - "4200:80"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - mfe1
+      - mfe2
+    networks:
+      - mfe-network
+
+  mfe1:
+    build:
+      context: .
+      dockerfile: Dockerfile.mfe1
+    ports:
+      - "4201:80"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - mfe-network
+
+  mfe2:
+    build:
+      context: .
+      dockerfile: Dockerfile.mfe2
+    ports:
+      - "4202:80"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - mfe-network
+
+networks:
+  mfe-network:
+    driver: bridge
+
+volumes:
+  node_modules:

@@ -1,0 +1,78 @@
+{
+  "name": ".",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:shell": "ng build shell",
+    "build:mfe1": "ng build mfe1-dashboard",
+    "build:mfe2": "ng build mfe2-user-management",
+    "build:shared": "ng build shared",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "ng lint",
+    "test:shared": "ng test shared",
+    "test:shell": "ng test shell",
+    "test:mfe1": "ng test mfe1-dashboard",
+    "test:mfe2": "ng test mfe2-user-management",
+    "e2e": "cypress run",
+    "e2e:open": "cypress open",
+    "start:all": "concurrently \"npm run start:shell\" \"npm run start:mfe1\" \"npm run start:mfe2\"",
+    "start:shell": "ng serve shell --port 4200",
+    "start:mfe1": "ng serve mfe1-dashboard --port 4201",
+    "start:mfe2": "ng serve mfe2-user-management --port 4202",
+    "serve:ssr:mfe1-dashboard": "node dist/mfe1-dashboard/server/server.mjs",
+    "serve:ssr:mfe2-user-management": "node dist/mfe2-user-management/server/server.mjs"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^20.3.0",
+    "@angular/compiler": "^20.3.0",
+    "@angular/core": "^20.3.0",
+    "@angular/forms": "^20.3.0",
+    "@angular/platform-browser": "^20.3.0",
+    "@angular/platform-server": "^20.3.0",
+    "@angular/router": "^20.3.0",
+    "@angular/ssr": "^20.3.3",
+    "express": "^5.1.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-architects/module-federation": "^20.0.0",
+    "@angular/build": "^20.3.3",
+    "@angular/cli": "^20.3.3",
+    "@angular/compiler-cli": "^20.3.0",
+    "@module-federation/enhanced": "^0.9.1",
+    "@types/express": "^5.0.1",
+    "@types/jasmine": "~5.1.0",
+    "@types/node": "^20.17.19",
+    "angular-eslint": "20.3.0",
+    "concurrently": "^9.2.1",
+    "cypress": "^14.5.4",
+    "eslint": "^9.35.0",
+    "jasmine-core": "~5.9.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^20.3.0",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "8.40.0"
+  }
+}
