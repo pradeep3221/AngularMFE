@@ -1,1 +1,222 @@
-<div class="user-management-container"><h1>User Management Microfrontend (MFE2)</h1><router-outlet></router-outlet></div>
+<div class="mfe2-user-management-container">
+  <!-- Header Section -->
+  <div class="container-fluid py-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div class="d-flex align-items-center">
+            <i class="material-icons me-3 text-primary" style="font-size: 2.5rem;">people</i>
+            <h1 class="h2 mb-0">User Management</h1>
+          </div>
+          <button class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>
+            Add User
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="row mb-4">
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="fas fa-search"></i>
+                  </span>
+                  <input type="text" class="form-control" placeholder="Search users...">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <select class="form-select">
+                  <option>All Roles</option>
+                  <option>Admin</option>
+                  <option>User</option>
+                  <option>Manager</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <select class="form-select">
+                  <option>All Status</option>
+                  <option>Active</option>
+                  <option>Inactive</option>
+                  <option>Pending</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body text-center">
+            <div class="d-flex align-items-center justify-content-center">
+              <i class="fas fa-users fa-2x text-info me-3"></i>
+              <div>
+                <div class="h4 mb-0">1,234</div>
+                <small class="text-muted">Total Users</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Users Table -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-white border-0">
+            <div class="d-flex align-items-center">
+              <i class="material-icons me-2 text-primary">table_view</i>
+              <h5 class="card-title mb-0">Users List</h5>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th class="border-0">
+                      <i class="fas fa-user me-2"></i>User
+                    </th>
+                    <th class="border-0">
+                      <i class="fas fa-envelope me-2"></i>Email
+                    </th>
+                    <th class="border-0">
+                      <i class="fas fa-shield-alt me-2"></i>Role
+                    </th>
+                    <th class="border-0">
+                      <i class="material-icons me-2" style="font-size: 1rem;">toggle_on</i>Status
+                    </th>
+                    <th class="border-0">
+                      <i class="fas fa-calendar me-2"></i>Last Login
+                    </th>
+                    <th class="border-0">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar-circle bg-primary text-white me-3">
+                          <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                          <div class="fw-semibold">John Doe</div>
+                          <small class="text-muted">ID: 001</small>
+                        </div>
+                      </div>
+                    </td>
+                    <td>john.doe@example.com</td>
+                    <td><span class="badge bg-primary">Admin</span></td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>2 hours ago</td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-outline-danger">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar-circle bg-info text-white me-3">
+                          <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                          <div class="fw-semibold">Jane Smith</div>
+                          <small class="text-muted">ID: 002</small>
+                        </div>
+                      </div>
+                    </td>
+                    <td>jane.smith@example.com</td>
+                    <td><span class="badge bg-info">Manager</span></td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>1 day ago</td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-outline-danger">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar-circle bg-warning text-white me-3">
+                          <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                          <div class="fw-semibold">Bob Johnson</div>
+                          <small class="text-muted">ID: 003</small>
+                        </div>
+                      </div>
+                    </td>
+                    <td>bob.johnson@example.com</td>
+                    <td><span class="badge bg-secondary">User</span></td>
+                    <td><span class="badge bg-warning">Pending</span></td>
+                    <td>Never</td>
+                    <td>
+                      <div class="btn-group btn-group-sm">
+                        <button class="btn btn-outline-primary">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-outline-danger">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer bg-white border-0">
+            <div class="d-flex align-items-center justify-content-between">
+              <small class="text-muted">Showing 3 of 1,234 users</small>
+              <nav>
+                <ul class="pagination pagination-sm mb-0">
+                  <li class="page-item disabled">
+                    <span class="page-link">
+                      <i class="fas fa-chevron-left"></i>
+                    </span>
+                  </li>
+                  <li class="page-item active">
+                    <span class="page-link">1</span>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">
+                      <i class="fas fa-chevron-right"></i>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

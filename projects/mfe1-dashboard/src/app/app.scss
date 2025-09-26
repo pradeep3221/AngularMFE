@@ -1,0 +1,60 @@
+/* MFE1 Dashboard Scoped Styles */
+.mfe1-dashboard-container {
+  background: #f8f9fa;
+  min-height: 100vh;
+
+  /* BEM naming for component isolation */
+  .mfe1-dashboard__header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem 0;
+  }
+
+  .mfe1-dashboard__stats-card {
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  .mfe1-dashboard__chart-placeholder {
+    background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+    border-radius: 8px;
+    padding: 2rem;
+  }
+
+  /* Material Icons integration */
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Custom card styling */
+  .card {
+    border-radius: 12px;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
+    }
+  }
+
+  /* Icon color variations */
+  .text-info { color: #17a2b8 !important; }
+  .text-success { color: #28a745 !important; }
+  .text-warning { color: #ffc107 !important; }
+  .text-danger { color: #dc3545 !important; }
+  .text-primary { color: #007bff !important; }
+}
