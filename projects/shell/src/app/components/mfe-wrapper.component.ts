@@ -176,7 +176,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class MfeWrapperComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private sanitizer = inject(DomSanitizer);
-  
+
   mfeUrl: string = '';
   title: string = '';
   safeMfeUrl: SafeResourceUrl | null = null;
@@ -186,14 +186,50 @@ export class MfeWrapperComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.mfeUrl = data['mfeUrl'] || '';
       this.title = data['title'] || 'Microfrontend';
-      
+
       if (this.mfeUrl) {
         this.safeMfeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.mfeUrl);
       }
     });
+
+    // Setup communication with the iframe
+    this.setupIframeCommunication();
   }
-  
+
   onIframeLoad() {
     this.isLoading = false;
+
+    // Send authentication state to the loaded MFE
+    this.sendAuthStateToIframe();
+  }
+
+  /**
+   * Setup communication with the iframe MFE
+   */
+  private setupIframeCommunication(): void {
+    window.addEventListener('message', (event) => {
+      if (event.origin !== window.location.origin) return;
+
+      // Handle messages from the iframe
+      switch (event.data.type) {
+        case 'AUTH_STATE_REQUEST':
+          this.sendAuthStateToIframe();
+          break;
+      }
+    });
+  }
+
+  /**
+   * Send authentication state to the iframe
+   */
+  private sendAuthStateToIframe(): void {
+    const iframe = document.querySelector('.mfe-iframe') as HTMLIFrameElement;
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.postMessage({
+        type: 'AUTH_STATE_RESPONSE',
+        isAuthenticated: true, // This would come from auth service
+        timestamp: Date.now()
+      }, window.location.origin);
+    }
   }
 }

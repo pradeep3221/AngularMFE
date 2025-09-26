@@ -10,6 +10,7 @@ services:
     depends_on:
       - mfe1
       - mfe2
+      - mfe3
     networks:
       - mfe-network
 
@@ -30,6 +31,17 @@ services:
       dockerfile: Dockerfile.mfe2
     ports:
       - "4202:80"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - mfe-network
+
+  mfe3:
+    build:
+      context: .
+      dockerfile: Dockerfile.mfe3
+    ports:
+      - "4203:80"
     environment:
       - NODE_ENV=production
     networks:

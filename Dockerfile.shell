@@ -15,8 +15,8 @@ RUN npm ci
 COPY projects/shell ./projects/shell
 COPY projects/shared ./projects/shared
 
-# Build the shell application
-RUN npm run build:shell
+# Build the shared library first, then the shell application
+RUN npm run build:shared && npm run build:shell
 
 # Production stage
 FROM nginx:alpine

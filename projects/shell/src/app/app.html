@@ -5,6 +5,30 @@
       <i class="fas fa-cubes me-2"></i>
       Angular Microfrontend Shell
     </h1>
+
+    <!-- Authentication Section -->
+    <div class="navbar-nav ms-auto">
+      @if (isLoading()) {
+        <div class="nav-item">
+          <span class="nav-link">
+            <i class="fas fa-spinner fa-spin me-2"></i>
+            Loading...
+          </span>
+        </div>
+      } @else if (isAuthenticated()) {
+        <!-- User Profile Dropdown -->
+        <lib-user-profile></lib-user-profile>
+      } @else {
+        <!-- Login Button -->
+        <div class="nav-item">
+          <button class="btn btn-outline-light" (click)="login()">
+            <i class="fas fa-sign-in-alt me-2"></i>
+            Sign In
+          </button>
+        </div>
+      }
+    </div>
+
     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,34 +37,51 @@
 
 <!-- Bootstrap Layout Container -->
 <div class="container-fluid">
-  <div class="row">
-    <!-- Sidebar -->
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div class="position-sticky pt-3">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link"
-               routerLink="/dashboard"
-               routerLinkActive="active">
-              <i class="fas fa-tachometer-alt me-2"></i>
-              Dashboard
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"
-               routerLink="/users"
-               routerLinkActive="active">
-              <i class="fas fa-users me-2"></i>
-              User Management
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+  @if (isAuthenticated()) {
+    <div class="row">
+      <!-- Sidebar -->
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link"
+                 routerLink="/dashboard"
+                 routerLinkActive="active">
+                <i class="fas fa-tachometer-alt me-2"></i>
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+                 routerLink="/users"
+                 routerLinkActive="active">
+                <i class="fas fa-users me-2"></i>
+                User Management
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    <!-- Main content -->
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
-      <router-outlet></router-outlet>
-    </main>
-  </div>
+      <!-- Main content -->
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  } @else {
+    <!-- Authentication Required Message -->
+    <div class="auth-required-container">
+      <div class="auth-required-content">
+        <div class="auth-icon">
+          <i class="fas fa-lock"></i>
+        </div>
+        <h2>Authentication Required</h2>
+        <p>Please sign in to access the microfrontend applications.</p>
+        <button class="btn btn-primary btn-lg" (click)="login()">
+          <i class="fas fa-sign-in-alt me-2"></i>
+          Sign In with Azure AD B2C
+        </button>
+      </div>
+    </div>
+  }
 </div>

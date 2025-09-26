@@ -52,6 +52,9 @@
     },
     {
       "path": "./projects/shared/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/mfe3-auth/tsconfig.app.json"
     }
   ]
 }
