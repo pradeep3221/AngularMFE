@@ -69,10 +69,6 @@ export class App implements OnInit, OnDestroy {
     console.log('[Shell] PWA State:', pwaState);
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
-  }
-
   /**
    * Setup cross-MFE communication for authentication
    */

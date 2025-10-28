@@ -103,7 +103,7 @@ export class PwaService {
    */
   async checkForUpdates(): Promise<void> {
     try {
-      const updateFound = await this.swUpdate.checkForUpdates();
+      const updateFound = await this.swUpdate.checkForUpdate();
       console.log('[PWA] Update check completed', { updateFound });
     } catch (error) {
       console.error('[PWA] Error checking for updates:', error);

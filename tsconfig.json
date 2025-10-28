@@ -11,9 +11,10 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "experimentalDecorators": true,
+    "baseUrl": ".",
     "paths": {
       "shared": [
-        "./dist/shared"
+        "projects/shared/src/public-api"
       ]
     },
     "importHelpers": true,
