@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   template: `
     <!-- Update Available Banner -->
     @if (showUpdateBanner()) {
-      <div class="banner update-banner" role="alert" [@slideDown]>
+      <div class="banner update-banner" role="alert">
         <div class="banner-content">
           <div class="banner-icon">
             <i class="fas fa-sync-alt"></i>
@@ -45,46 +45,9 @@ import { Subscription } from 'rxjs';
       </div>
     }
 
-    <!-- Install Prompt Banner -->
-    @if (showInstallBanner()) {
-      <div class="banner install-banner" role="alert" [@slideDown]>
-        <div class="banner-content">
-          <div class="banner-icon">
-            <i class="fas fa-download"></i>
-          </div>
-          <div class="banner-message">
-            <strong>Install App</strong>
-            <p>Install this application on your device for quick access and offline support.</p>
-          </div>
-        </div>
-        <div class="banner-actions">
-          <button 
-            type="button"
-            class="btn btn-success btn-sm"
-            (click)="installApp()"
-            [disabled]="isInstalling()">
-            @if (isInstalling()) {
-              <i class="fas fa-spinner fa-spin me-2"></i>
-              <span>Installing...</span>
-            } @else {
-              <i class="fas fa-plus me-2"></i>
-              <span>Install</span>
-            }
-          </button>
-          <button 
-            type="button"
-            class="btn btn-secondary btn-sm"
-            (click)="dismissInstall()">
-            <i class="fas fa-times me-2"></i>
-            <span>Dismiss</span>
-          </button>
-        </div>
-      </div>
-    }
-
     <!-- Offline Status Banner -->
     @if (!isOnline()) {
-      <div class="banner offline-banner" role="alert" [@slideDown]>
+      <div class="banner offline-banner" role="alert">
         <div class="banner-content">
           <div class="banner-icon">
             <i class="fas fa-wifi-off"></i>
@@ -99,7 +62,7 @@ import { Subscription } from 'rxjs';
 
     <!-- Online Status Restored Banner -->
     @if (showOnlineRestored()) {
-      <div class="banner online-restored-banner" role="alert" [@slideDown]>
+      <div class="banner online-restored-banner" role="alert">
         <div class="banner-content">
           <div class="banner-icon">
             <i class="fas fa-wifi"></i>
@@ -283,10 +246,6 @@ export class UpdateAvailableComponent implements OnInit, OnDestroy {
   protected showUpdateBanner = signal(false);
   protected isUpdating = signal(false);
 
-  // Signal for showing install banner
-  protected showInstallBanner = signal(false);
-  protected isInstalling = signal(false);
-
   // Signal for showing online restored banner
   protected showOnlineRestored = signal(false);
 
@@ -294,7 +253,6 @@ export class UpdateAvailableComponent implements OnInit, OnDestroy {
 
   private subscriptions = new Subscription();
   private wasOffline = false;
-  private installDismissed = false;
 
   ngOnInit(): void {
     this.setupUpdateListener();
@@ -327,19 +285,8 @@ export class UpdateAvailableComponent implements OnInit, OnDestroy {
    * Setup listener for install prompt events
    */
   private setupInstallPromptListener(): void {
-    this.subscriptions.add(
-      this.pwaService.getInstallPromptAvailable().subscribe(() => {
-        console.log('[UpdateAvailable] Install prompt available signal received');
-        if (!this.installDismissed) {
-          this.showInstallBanner.set(true);
-        }
-      })
-    );
-
-    // Also check initial state
-    if (this.pwaService.isInstallPromptAvailable() && !this.installDismissed) {
-      this.showInstallBanner.set(true);
-    }
+    // Install prompts are handled by the browser address bar
+    // No banner needed
   }
 
   /**
@@ -385,29 +332,5 @@ export class UpdateAvailableComponent implements OnInit, OnDestroy {
    */
   dismissUpdate(): void {
     this.showUpdateBanner.set(false);
-  }
-
-  /**
-   * Trigger app installation
-   */
-  async installApp(): Promise<void> {
-    this.isInstalling.set(true);
-    try {
-      await this.pwaService.installApp();
-      this.showInstallBanner.set(false);
-      this.installDismissed = true;
-    } catch (error) {
-      console.error('[UpdateAvailable] Error installing app:', error);
-    } finally {
-      this.isInstalling.set(false);
-    }
-  }
-
-  /**
-   * Dismiss install banner
-   */
-  dismissInstall(): void {
-    this.showInstallBanner.set(false);
-    this.installDismissed = true;
   }
 }

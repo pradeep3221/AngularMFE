@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     ...provideAuth(),
     // Register Service Worker for PWA
     provideServiceWorker('ngsw-worker.js', {
-      enabled: environment.production,
+      enabled: environment.pwa?.enabled ?? environment.production,
       registrationStrategy: 'registerImmediately'
     }),
     // Provide PWA Service
