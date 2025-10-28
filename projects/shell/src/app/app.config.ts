@@ -1,7 +1,9 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { provideAuth } from 'shared';
+import { provideAuth, PwaService } from 'shared';
+import { provideServiceWorker } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 import { routes } from './app.routes';
 
@@ -11,6 +13,13 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
-    ...provideAuth()
+    ...provideAuth(),
+    // Register Service Worker for PWA
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerImmediately'
+    }),
+    // Provide PWA Service
+    PwaService
   ]
 };

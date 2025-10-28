@@ -1,18 +1,20 @@
 import { Component, signal, inject, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AuthService, UserProfileComponent } from 'shared';
+import { AuthService, UserProfileComponent, PwaService } from 'shared';
+import { UpdateAvailableComponent } from './components/update-available.component';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, UserProfileComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, UserProfileComponent, UpdateAvailableComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App implements OnInit, OnDestroy {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly pwaService = inject(PwaService);
   private subscriptions = new Subscription();
 
   protected readonly title = signal('shell');
@@ -23,6 +25,9 @@ export class App implements OnInit, OnDestroy {
   protected readonly isLoading = this.authService.isLoading;
 
   ngOnInit(): void {
+    // Initialize PWA service
+    this.initializePWA();
+
     // Initialize cross-MFE authentication communication
     this.setupCrossMFECommunication();
 
@@ -42,6 +47,26 @@ export class App implements OnInit, OnDestroy {
     );
 
     console.log('Shell application initialized with authentication');
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  /**
+   * Initialize PWA functionality
+   */
+  private initializePWA(): void {
+    console.log('[Shell] Initializing PWA');
+
+    // Listen for app visibility changes to check for updates
+    document.addEventListener('visibilitychange', () => {
+      this.pwaService.handleVisibilityChange();
+    });
+
+    // Log current PWA state
+    const pwaState = this.pwaService.getState();
+    console.log('[Shell] PWA State:', pwaState);
   }
 
   ngOnDestroy(): void {

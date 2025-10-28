@@ -226,12 +226,48 @@ stateService.state$.subscribe(state => {
 - Authentication token management
 - Secure communication between microfrontends
 
-## 📈 Performance Optimization
+## � Progressive Web App (PWA)
+
+This project includes a complete **Progressive Web App (PWA)** implementation with the following features:
+
+- ✅ Service Worker for offline support
+- ✅ Automatic update detection and notification
+- ✅ App installability on desktop and mobile
+- ✅ Intelligent caching strategies
+- ✅ Online/offline status detection
+
+### PWA Features
+
+- **Install App**: Users can install the app on their devices from the home screen
+- **Offline Support**: Access previously loaded content when offline
+- **Auto-Updates**: Receive notifications when new versions are available
+- **Fast Loading**: Benefit from service worker caching for improved performance
+
+### PWA Quick Start
+
+```bash
+# Build for production with PWA support
+npm run build:shell
+
+# Test PWA locally
+npx http-server dist/shell -c-1
+
+# Or use Docker
+docker-compose up
+```
+
+For comprehensive PWA documentation, see:
+- **[PWA_INDEX.md](./PWA_INDEX.md)** - Complete PWA documentation index
+- **[PWA_QUICK_START.md](./PWA_QUICK_START.md)** - Quick start guide
+- **[PWA_IMPLEMENTATION.md](./PWA_IMPLEMENTATION.md)** - Technical documentation
+
+## �📈 Performance Optimization
 
 - Lazy loading of microfrontends
 - Shared dependencies optimization
 - Bundle size monitoring
 - Caching strategies
+- Service Worker for offline caching
 
 ## 🤝 Contributing
 
