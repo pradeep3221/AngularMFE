@@ -1,0 +1,116 @@
+{
+  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": [
+          "/favicon.ico",
+          "/index.html",
+          "/manifest.webmanifest",
+          "/*.css",
+          "/*.js",
+          "/assets/**"
+        ]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "lazy",
+      "resources": {
+        "files": [
+          "/assets/**",
+          "/**/*.svg",
+          "/**/*.png",
+          "/**/*.jpg",
+          "/**/*.jpeg",
+          "/**/*.gif",
+          "/**/*.webp"
+        ]
+      }
+    },
+    {
+      "name": "mfe-remoteentries",
+      "installMode": "lazy",
+      "updateMode": "lazy",
+      "resources": {
+        "urls": [
+          "http://localhost:4201/remoteEntry.js",
+          "http://localhost:4202/remoteEntry.js",
+          "http://localhost:4203/remoteEntry.js",
+          "http://mfe1:4201/remoteEntry.js",
+          "http://mfe2:4202/remoteEntry.js",
+          "http://mfe3:4203/remoteEntry.js"
+        ]
+      }
+    },
+    {
+      "name": "mfe-assets",
+      "installMode": "lazy",
+      "updateMode": "lazy",
+      "resources": {
+        "urls": [
+          "http://localhost:4201/**",
+          "http://localhost:4202/**",
+          "http://localhost:4203/**",
+          "http://mfe1/**",
+          "http://mfe2/**",
+          "http://mfe3/**"
+        ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-cache",
+      "urls": [
+        "/api/**"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 100,
+        "maxAge": "1d"
+      }
+    },
+    {
+      "name": "mfe-api-cache",
+      "urls": [
+        "http://localhost:4201/api/**",
+        "http://localhost:4202/api/**",
+        "http://localhost:4203/api/**",
+        "http://mfe1/api/**",
+        "http://mfe2/api/**",
+        "http://mfe3/api/**"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "timeout": "5s",
+        "maxSize": 50,
+        "maxAge": "12h"
+      }
+    },
+    {
+      "name": "external-api",
+      "urls": [
+        "https://api.example.com/**",
+        "https://cdn.example.com/**"
+      ],
+      "cacheConfig": {
+        "strategy": "network-first",
+        "timeout": "10s",
+        "maxSize": 200,
+        "maxAge": "24h"
+      }
+    }
+  ],
+  "navigationUrls": [
+    "/**",
+    "!/**/*.*",
+    "!/**/__*",
+    "!/api/**"
+  ]
+}

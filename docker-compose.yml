@@ -2,7 +2,7 @@ services:
   shell:
     build:
       context: .
-      dockerfile: Dockerfile.shell
+      dockerfile: projects/shell/Dockerfile
     ports:
       - "4200:80"
     environment:
@@ -17,7 +17,7 @@ services:
   mfe1:
     build:
       context: .
-      dockerfile: Dockerfile.mfe1
+      dockerfile: projects/mfe1-dashboard/Dockerfile
     ports:
       - "4201:80"
     environment:
@@ -28,7 +28,7 @@ services:
   mfe2:
     build:
       context: .
-      dockerfile: Dockerfile.mfe2
+      dockerfile: projects/mfe2-user-management/Dockerfile
     ports:
       - "4202:80"
     environment:
@@ -39,7 +39,7 @@ services:
   mfe3:
     build:
       context: .
-      dockerfile: Dockerfile.mfe3
+      dockerfile: projects/mfe3-auth/Dockerfile
     ports:
       - "4203:80"
     environment:
